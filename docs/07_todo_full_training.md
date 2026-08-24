@@ -445,14 +445,24 @@ total_epochs = 24
 
 ### 8.3 启动 8 卡训练
 
+> 环境：用 **`/home/xiaoxuan/miniconda3/envs/maptr`**（已修复为兼容组合：**numpy 1.22.4 + numba 0.48.0 + llvmlite 0.31.0**，匹配 mmdet3d 0.17.2；版本问题见常见坑）。
+> ⚠️ **必须设 `PYTHONPATH=/data2/wyc/nuplan_maptrv2/MapTRV2`**，否则 worker 报 `No module named 'projects'`。
+
+**方式一（推荐）：一键脚本**
+
+```bash
+bash /data2/wyc/nuplan_maptrv2/MapTRV2/run_full_train.sh
+```
+
+**方式二：完整命令（export 与 nohup 一起复制，缺一不可）**
+
 ```bash
 cd /data2/wyc/nuplan_maptrv2/MapTRV2
-export PATH=/home/bicv01/miniforge3/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-export LD_LIBRARY_PATH=/home/bicv01/miniforge3/envs/maptr/lib/python3.8/site-packages/torch/lib:$LD_LIBRARY_PATH
-export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 export PYTHONPATH=/data2/wyc/nuplan_maptrv2/MapTRV2
+export LD_LIBRARY_PATH=/home/xiaoxuan/miniconda3/envs/maptr/lib/python3.8/site-packages/torch/lib:$LD_LIBRARY_PATH
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
-nohup /home/bicv01/miniforge3/envs/maptr/bin/python -m torch.distributed.launch \
+nohup /home/xiaoxuan/miniconda3/envs/maptr/bin/python -m torch.distributed.launch \
   --nproc_per_node=8 --master_port=28509 \
   tools/train.py projects/configs/maptrv2/maptrv2_nuplan_full.py \
   --launcher pytorch \
@@ -461,7 +471,9 @@ nohup /home/bicv01/miniforge3/envs/maptr/bin/python -m torch.distributed.launch 
   > /data2/wyc/nuplan_maptrv2/work_dirs/full/train_full.log 2>&1 &
 ```
 
-检查点：`tail -f work_dirs/full/train_full.log`，等出现 `Epoch [1][50/...]` 的 loss 即正常。
+> 提示：**不要** `export PATH=/home/xiaoxuan/miniconda3/bin:...`（会把 base 的 python 放最前，之后若敲 `python` 会命中 base 而报 `No module named 'torch'`）；命令里用 maptr 的绝对路径 python 即可。
+
+检查点：`tail -f work_dirs/full/train_full.log`，等出现 `Epoch [1][...]` 的 loss 即正常。
 
 ---
 
@@ -488,6 +500,8 @@ nohup /home/bicv01/miniforge3/envs/maptr/bin/python -m torch.distributed.launch 
 | `dbs/` 中 DB 损坏导致脚本崩溃 | 使用 `--skip-db-check` 跳过 DB 校验 |
 | 扫描索引时 tar 格式报错 | sensor blobs 实际是 tar 格式，脚本已支持自动识别；确保使用最新脚本 |
 | 训练 loss 异常 | 完整数据量下学习率/warmup 需要调整；先小规模试跑 |
+| 训练启动报 `AttributeError: module 'numpy' has no attribute 'long'/'int'` | numpy 1.24 太新，与旧 numba/networkx 不兼容；统一装 **`numpy==1.22.4`**（`np.long/np.int/np.float` 在 1.22 仍可用） |
+| 训练启动报 `ModuleNotFoundError: No module named 'numba.errors'` | numba 太新（0.57）与 mmdet3d 0.17.2 不兼容；降回 **`numba==0.48.0`**（配 `llvmlite==0.31.0`） |
 | 用官方 `CustomNuScenesOfflineLocalMapDataset` 报 KeyError（缺 `ego2global_*`/`can_bus`/`lidar2ego_*` 等） | info 不是 nuScenes 格式；用 `--format nuscenes` 重新生成（旧 AV2 风格只配 `NuPlanMapDataset`） |
 | `FileNotFoundError: reports/sensor_blobs_index_full_val.json` | val 解压前漏跑 val 索引扫描；执行步骤 3 的 4.2 命令生成 |
 

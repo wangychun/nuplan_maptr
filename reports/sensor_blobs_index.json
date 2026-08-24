@@ -1,0 +1,1335 @@
+{
+  "archives": {
+    "nuplan-v1.1_mini_camera_0.zip": {
+      "kind": "camera",
+      "size_gb": 52.22,
+      "coverage": {
+        "2021.05.12.22.28.35_veh-35_00620_01164": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.05.12.23.36.44_veh-35_00152_00504": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.05.12.23.36.44_veh-35_01133_01535": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.03.12.02.06_veh-35_00233_00609": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.05.12.23.36.44_veh-35_02035_02387": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.05.25.14.16.10_veh-35_01690_02183": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.05.12.22.00.38_veh-35_01008_01518": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_1.zip": {
+      "kind": "camera",
+      "size_gb": 54.21,
+      "coverage": {
+        "2021.06.08.14.35.24_veh-26_02555_03004": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.08.16.31.33_veh-38_01589_02072": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.11.54.15_veh-12_04366_04810": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.03.13.55.17_veh-35_00073_00426": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.08.12.54.54_veh-26_04262_04732": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.07.12.54.00_veh-35_01843_02314": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.07.18.53.26_veh-26_00005_00427": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_2.zip": {
+      "kind": "camera",
+      "size_gb": 49.96,
+      "coverage": {
+        "2021.06.09.12.39.51_veh-26_01943_02303": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.12.39.51_veh-26_05620_06003": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.14.03.17_veh-12_02584_02970": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.17.23.18_veh-38_00773_01140": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.14.58.55_veh-35_01894_02311": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.17.23.18_veh-38_02526_03027": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.14.58.55_veh-35_01095_01484": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_3.zip": {
+      "kind": "camera",
+      "size_gb": 49.94,
+      "coverage": {
+        "2021.06.14.18.33.41_veh-35_03901_04264": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.14.16.48.02_veh-12_04057_04438": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.14.17.26.26_veh-38_04544_04920": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.14.16.48.02_veh-12_04978_05337": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.09.17.37.09_veh-12_00404_00864": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.14.18.42.45_veh-12_03445_03902": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.14.16.32.09_veh-35_05038_05402": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_4.zip": {
+      "kind": "camera",
+      "size_gb": 49.15,
+      "coverage": {
+        "2021.06.28.16.29.11_veh-38_01415_01821": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.28.15.02.02_veh-38_02398_02848": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.14.19.22.11_veh-38_01480_01860": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.23.20.43.31_veh-16_03607_04007": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.23.17.31.36_veh-16_00016_00377": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.23.16.54.19_veh-35_00808_01256": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.23.15.56.12_veh-16_00839_01285": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_5.zip": {
+      "kind": "camera",
+      "size_gb": 50.79,
+      "coverage": {
+        "2021.07.09.17.06.37_veh-35_00258_00748": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.28.16.29.11_veh-38_03263_03766": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.06.28.16.57.59_veh-26_00016_00484": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.16.00.51.05_veh-17_01352_01901": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.16.18.06.21_veh-38_03231_03712": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.09.20.59.12_veh-38_01208_01692": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_6.zip": {
+      "kind": "camera",
+      "size_gb": 49.9,
+      "coverage": {
+        "2021.07.16.18.19.22_veh-35_00440_00858": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.16.20.45.29_veh-35_01095_01486": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.24.23.50.16_veh-17_01696_02071": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.16.18.06.21_veh-38_04471_04922": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.16.18.06.21_veh-38_04933_05307": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.24.20.37.45_veh-17_00015_00375": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.07.16.20.45.29_veh-35_00600_01084": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_7.zip": {
+      "kind": "camera",
+      "size_gb": 49.33,
+      "coverage": {
+        "2021.08.17.17.17.01_veh-45_02314_02798": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.08.17.18.54.02_veh-45_00665_01065": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.09.16.15.12.03_veh-42_01037_01434": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.01.19.16.42_veh-28_02011_02410": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.01.19.16.42_veh-28_03307_03808": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.08.17.16.57.11_veh-08_01200_01636": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.08.30.14.54.34_veh-40_00439_00835": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_camera_8.zip": {
+      "kind": "camera",
+      "size_gb": 45.16,
+      "coverage": {
+        "2021.10.06.07.26.10_veh-52_00006_00398": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.08.09.17.55.59_veh-28_00021_00307": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.05.07.10.04_veh-52_01442_01802": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.11.07.12.18_veh-50_00211_00304": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.06.17.43.07_veh-28_00508_00877": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.11.02.57.41_veh-50_00352_00535": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.08.24.13.12.55_veh-45_00386_00472": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.11.08.31.07_veh-50_01750_01948": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ],
+        "2021.10.11.02.57.41_veh-50_01522_02088": [
+          "CAM_B0",
+          "CAM_F0",
+          "CAM_L0",
+          "CAM_L1",
+          "CAM_L2",
+          "CAM_R0",
+          "CAM_R1",
+          "CAM_R2"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_0.zip": {
+      "kind": "lidar",
+      "size_gb": 74.07,
+      "coverage": {
+        "2021.05.12.22.28.35_veh-35_00620_01164": [
+          "MergedPointCloud"
+        ],
+        "2021.05.12.23.36.44_veh-35_00152_00504": [
+          "MergedPointCloud"
+        ],
+        "2021.05.12.23.36.44_veh-35_01133_01535": [
+          "MergedPointCloud"
+        ],
+        "2021.06.03.12.02.06_veh-35_00233_00609": [
+          "MergedPointCloud"
+        ],
+        "2021.05.12.23.36.44_veh-35_02035_02387": [
+          "MergedPointCloud"
+        ],
+        "2021.05.25.14.16.10_veh-35_01690_02183": [
+          "MergedPointCloud"
+        ],
+        "2021.05.12.22.00.38_veh-35_01008_01518": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_1.zip": {
+      "kind": "lidar",
+      "size_gb": 74.51,
+      "coverage": {
+        "2021.06.08.14.35.24_veh-26_02555_03004": [
+          "MergedPointCloud"
+        ],
+        "2021.06.08.16.31.33_veh-38_01589_02072": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.11.54.15_veh-12_04366_04810": [
+          "MergedPointCloud"
+        ],
+        "2021.06.03.13.55.17_veh-35_00073_00426": [
+          "MergedPointCloud"
+        ],
+        "2021.06.08.12.54.54_veh-26_04262_04732": [
+          "MergedPointCloud"
+        ],
+        "2021.06.07.12.54.00_veh-35_01843_02314": [
+          "MergedPointCloud"
+        ],
+        "2021.06.07.18.53.26_veh-26_00005_00427": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_2.zip": {
+      "kind": "lidar",
+      "size_gb": 67.48,
+      "coverage": {
+        "2021.06.09.12.39.51_veh-26_01943_02303": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.12.39.51_veh-26_05620_06003": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.14.03.17_veh-12_02584_02970": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.17.23.18_veh-38_00773_01140": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.14.58.55_veh-35_01894_02311": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.17.23.18_veh-38_02526_03027": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.14.58.55_veh-35_01095_01484": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_3.zip": {
+      "kind": "lidar",
+      "size_gb": 63.95,
+      "coverage": {
+        "2021.06.14.18.33.41_veh-35_03901_04264": [
+          "MergedPointCloud"
+        ],
+        "2021.06.14.16.48.02_veh-12_04057_04438": [
+          "MergedPointCloud"
+        ],
+        "2021.06.14.17.26.26_veh-38_04544_04920": [
+          "MergedPointCloud"
+        ],
+        "2021.06.14.16.48.02_veh-12_04978_05337": [
+          "MergedPointCloud"
+        ],
+        "2021.06.09.17.37.09_veh-12_00404_00864": [
+          "MergedPointCloud"
+        ],
+        "2021.06.14.18.42.45_veh-12_03445_03902": [
+          "MergedPointCloud"
+        ],
+        "2021.06.14.16.32.09_veh-35_05038_05402": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_4.zip": {
+      "kind": "lidar",
+      "size_gb": 70.75,
+      "coverage": {
+        "2021.06.28.16.29.11_veh-38_01415_01821": [
+          "MergedPointCloud"
+        ],
+        "2021.06.28.15.02.02_veh-38_02398_02848": [
+          "MergedPointCloud"
+        ],
+        "2021.06.14.19.22.11_veh-38_01480_01860": [
+          "MergedPointCloud"
+        ],
+        "2021.06.23.20.43.31_veh-16_03607_04007": [
+          "MergedPointCloud"
+        ],
+        "2021.06.23.17.31.36_veh-16_00016_00377": [
+          "MergedPointCloud"
+        ],
+        "2021.06.23.16.54.19_veh-35_00808_01256": [
+          "MergedPointCloud"
+        ],
+        "2021.06.23.15.56.12_veh-16_00839_01285": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_5.zip": {
+      "kind": "lidar",
+      "size_gb": 72.5,
+      "coverage": {
+        "2021.07.09.17.06.37_veh-35_00258_00748": [
+          "MergedPointCloud"
+        ],
+        "2021.06.28.16.29.11_veh-38_03263_03766": [
+          "MergedPointCloud"
+        ],
+        "2021.06.28.16.57.59_veh-26_00016_00484": [
+          "MergedPointCloud"
+        ],
+        "2021.07.16.00.51.05_veh-17_01352_01901": [
+          "MergedPointCloud"
+        ],
+        "2021.07.16.18.06.21_veh-38_03231_03712": [
+          "MergedPointCloud"
+        ],
+        "2021.07.09.20.59.12_veh-38_01208_01692": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_6.zip": {
+      "kind": "lidar",
+      "size_gb": 69.83,
+      "coverage": {
+        "2021.07.16.18.19.22_veh-35_00440_00858": [
+          "MergedPointCloud"
+        ],
+        "2021.07.16.20.45.29_veh-35_01095_01486": [
+          "MergedPointCloud"
+        ],
+        "2021.07.24.23.50.16_veh-17_01696_02071": [
+          "MergedPointCloud"
+        ],
+        "2021.07.16.18.06.21_veh-38_04471_04922": [
+          "MergedPointCloud"
+        ],
+        "2021.07.16.18.06.21_veh-38_04933_05307": [
+          "MergedPointCloud"
+        ],
+        "2021.07.24.20.37.45_veh-17_00015_00375": [
+          "MergedPointCloud"
+        ],
+        "2021.07.16.20.45.29_veh-35_00600_01084": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_7.zip": {
+      "kind": "lidar",
+      "size_gb": 75.95,
+      "coverage": {
+        "2021.08.17.17.17.01_veh-45_02314_02798": [
+          "MergedPointCloud"
+        ],
+        "2021.08.17.18.54.02_veh-45_00665_01065": [
+          "MergedPointCloud"
+        ],
+        "2021.09.16.15.12.03_veh-42_01037_01434": [
+          "MergedPointCloud"
+        ],
+        "2021.10.01.19.16.42_veh-28_02011_02410": [
+          "MergedPointCloud"
+        ],
+        "2021.10.01.19.16.42_veh-28_03307_03808": [
+          "MergedPointCloud"
+        ],
+        "2021.08.17.16.57.11_veh-08_01200_01636": [
+          "MergedPointCloud"
+        ],
+        "2021.08.30.14.54.34_veh-40_00439_00835": [
+          "MergedPointCloud"
+        ]
+      }
+    },
+    "nuplan-v1.1_mini_lidar_8.zip": {
+      "kind": "lidar",
+      "size_gb": 65.31,
+      "coverage": {
+        "2021.10.06.07.26.10_veh-52_00006_00398": [
+          "MergedPointCloud"
+        ],
+        "2021.08.09.17.55.59_veh-28_00021_00307": [
+          "MergedPointCloud"
+        ],
+        "2021.10.05.07.10.04_veh-52_01442_01802": [
+          "MergedPointCloud"
+        ],
+        "2021.10.11.07.12.18_veh-50_00211_00304": [
+          "MergedPointCloud"
+        ],
+        "2021.10.06.17.43.07_veh-28_00508_00877": [
+          "MergedPointCloud"
+        ],
+        "2021.10.11.02.57.41_veh-50_00352_00535": [
+          "MergedPointCloud"
+        ],
+        "2021.08.24.13.12.55_veh-45_00386_00472": [
+          "MergedPointCloud"
+        ],
+        "2021.10.11.08.31.07_veh-50_01750_01948": [
+          "MergedPointCloud"
+        ],
+        "2021.10.11.02.57.41_veh-50_01522_02088": [
+          "MergedPointCloud"
+        ]
+      }
+    }
+  },
+  "dbs": [
+    {
+      "db": "2021.05.12.22.00.38_veh-35_01008_01518.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.05.12.22.28.35_veh-35_00620_01164.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.05.12.23.36.44_veh-35_00152_00504.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.05.12.23.36.44_veh-35_01133_01535.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.05.12.23.36.44_veh-35_02035_02387.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.05.25.14.16.10_veh-35_01690_02183.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.03.12.02.06_veh-35_00233_00609.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.03.13.55.17_veh-35_00073_00426.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.07.12.54.00_veh-35_01843_02314.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.07.18.53.26_veh-26_00005_00427.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.08.12.54.54_veh-26_04262_04732.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.08.14.35.24_veh-26_02555_03004.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.08.16.31.33_veh-38_01589_02072.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.11.54.15_veh-12_04366_04810.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.12.39.51_veh-26_01943_02303.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.12.39.51_veh-26_05620_06003.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.14.03.17_veh-12_02584_02970.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.14.58.55_veh-35_01095_01484.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.14.58.55_veh-35_01894_02311.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.17.23.18_veh-38_00773_01140.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.17.23.18_veh-38_02526_03027.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.09.17.37.09_veh-12_00404_00864.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.14.16.32.09_veh-35_05038_05402.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.14.16.48.02_veh-12_04057_04438.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.14.16.48.02_veh-12_04978_05337.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.14.17.26.26_veh-38_04544_04920.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.14.18.33.41_veh-35_03901_04264.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.14.18.42.45_veh-12_03445_03902.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.14.19.22.11_veh-38_01480_01860.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.23.15.56.12_veh-16_00839_01285.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.23.16.54.19_veh-35_00808_01256.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.23.17.31.36_veh-16_00016_00377.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.23.20.43.31_veh-16_03607_04007.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.28.15.02.02_veh-38_02398_02848.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.28.16.29.11_veh-38_01415_01821.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.28.16.29.11_veh-38_03263_03766.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.06.28.16.57.59_veh-26_00016_00484.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.09.17.06.37_veh-35_00258_00748.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.09.20.59.12_veh-38_01208_01692.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.16.00.51.05_veh-17_01352_01901.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.16.18.06.21_veh-38_03231_03712.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.16.18.06.21_veh-38_04471_04922.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.16.18.06.21_veh-38_04933_05307.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.16.18.19.22_veh-35_00440_00858.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.16.20.45.29_veh-35_00600_01084.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.16.20.45.29_veh-35_01095_01486.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.24.20.37.45_veh-17_00015_00375.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.07.24.23.50.16_veh-17_01696_02071.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.08.09.17.55.59_veh-28_00021_00307.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.08.17.16.57.11_veh-08_01200_01636.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.08.17.17.17.01_veh-45_02314_02798.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.08.17.18.54.02_veh-45_00665_01065.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.08.24.13.12.55_veh-45_00386_00472.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.08.30.14.54.34_veh-40_00439_00835.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.09.16.15.12.03_veh-42_01037_01434.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.01.19.16.42_veh-28_02011_02410.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.01.19.16.42_veh-28_03307_03808.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.05.07.10.04_veh-52_01442_01802.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.06.07.26.10_veh-52_00006_00398.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.06.17.43.07_veh-28_00508_00877.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.11.02.57.41_veh-50_00352_00535.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.11.02.57.41_veh-50_01522_02088.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.11.07.12.18_veh-50_00211_00304.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    },
+    {
+      "db": "2021.10.11.08.31.07_veh-50_01750_01948.db",
+      "camera_missing": [],
+      "lidar_missing": [],
+      "ok": true
+    }
+  ],
+  "summary": {
+    "db_total": 64,
+    "db_ok": 64,
+    "db_missing": 0
+  }
+}

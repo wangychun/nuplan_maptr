@@ -1,0 +1,29 @@
+# ===== 原始数据与生成产物（不入库）=====
+raw/
+work_dirs/
+data/
+.wheels/
+.vscode/
+
+# ===== MapTRV2 内部：数据 / 预训练权重 / 第三方框架（仅保留占位 README）=====
+MapTRV2/data/*
+!MapTRV2/data/README.md
+MapTRV2/ckpts/*
+!MapTRV2/ckpts/README.md
+MapTRV2/mmdetection3d/*
+!MapTRV2/mmdetection3d/README.md
+!MapTRV2/mmdetection3d/GETTING_MMDET3D.md
+MapTRV2/nohup.out
+
+# ===== 二进制 / 缓存 / 日志 =====
+*.pth
+*.db
+*.zip
+*.tar
+*.gz
+*.whl
+*.log
+nohup.out
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

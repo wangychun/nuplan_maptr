@@ -1,0 +1,50 @@
+{
+  "pc_range": [
+    -15.0,
+    -30.0,
+    -10.0,
+    15.0,
+    30.0,
+    10.0
+  ],
+  "samples": 2560,
+  "empty_gt": 10,
+  "empty_ratio": 0.0039,
+  "per_class_instances": {
+    "divider": 14900,
+    "ped_crossing": 5466,
+    "boundary": 11289
+  },
+  "per_class_mean_length": {
+    "divider": 19.07,
+    "ped_crossing": 12.89,
+    "boundary": 27.6
+  },
+  "per_class_max_length": {
+    "divider": 66.09,
+    "ped_crossing": 36.6,
+    "boundary": 139.6
+  },
+  "coord_minmax": {
+    "divider": {
+      "xmin": -34.074108055909164,
+      "xmax": 34.188830637489446,
+      "ymin": -33.41566637903452,
+      "ymax": 33.83484905026853
+    },
+    "boundary": {
+      "xmin": -34.19417503889417,
+      "xmax": 34.118611415149644,
+      "ymin": -34.013578314334154,
+      "ymax": 33.72275613853708
+    },
+    "ped_crossing": {
+      "xmin": -35.502588804927655,
+      "xmax": 34.88451691932278,
+      "ymin": -33.72594998849672,
+      "ymax": 34.193008173722774
+    }
+  },
+  "errors": [],
+  "error_count": 0
+}

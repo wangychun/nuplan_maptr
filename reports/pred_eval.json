@@ -1,0 +1,27 @@
+{
+  "n_samples": 144,
+  "n_pred_total": 7177,
+  "n_gt_total": 1561,
+  "pred_per_sample": 49.84,
+  "score_mean": 0.244,
+  "score_min": 0.2,
+  "score_max": 0.278,
+  "pred_cls": {
+    "divider": 2695,
+    "ped_crossing": 0,
+    "boundary": 4482
+  },
+  "gt_cls": {
+    "divider": 524,
+    "ped_crossing": 262,
+    "boundary": 775
+  },
+  "pred_len_mean": 20.0,
+  "chamfer_mean_by_cls": {
+    "divider": 4.21,
+    "ped_crossing": null,
+    "boundary": 2.67
+  },
+  "chamfer_overall": 3.25,
+  "score_thresh": 0.2
+}

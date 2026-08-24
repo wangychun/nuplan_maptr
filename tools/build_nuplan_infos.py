@@ -262,6 +262,9 @@ def main():
     db_dir = Path(args.db_dir)
     map_root = Path(args.map_root)
     img_root = Path(args.img_root)
+    if not img_root.is_absolute():
+        # 保证生成的 data_path 是绝对路径（否则训练 CWD 与 build 不同时找不到图像）
+        img_root = Path.cwd() / img_root
     pc_range = args.pc_range
     patch_xy = (pc_range[4] - pc_range[1], pc_range[3] - pc_range[0])
 

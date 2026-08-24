@@ -312,9 +312,13 @@ def main():
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    key = "infos" if args.format == "nuscenes" else "samples"
+    if args.format == "nuscenes":
+        # 官方 NuScenesDataset.load_annotations 需要 data['metadata']['version']
+        data = {"infos": samples, "metadata": {"version": "nuplan-v1.1"}}
+    else:
+        data = {"samples": samples}
     with open(out, "wb") as f:
-        pickle.dump({key: samples}, f, protocol=4)
+        pickle.dump(data, f, protocol=4)
     print(f"saved {len(samples)} samples (discarded {discarded}) -> {out}")
 
 

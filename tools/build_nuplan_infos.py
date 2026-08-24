@@ -61,6 +61,19 @@ DEFAULT_CHANNELS = ["CAM_F0", "CAM_F0_L", "CAM_F0_R",
                     "CAM_B0", "CAM_L0", "CAM_L1", "CAM_L2",
                     "CAM_R0", "CAM_R1", "CAM_R2"]
 
+# nuPlan 6 路 -> nuScenes 六视角相机命名（对齐 nuScenes 数据集，仅 --format nuscenes 生效）
+NUSC_CAM_MAP = {
+    "CAM_F0": "CAM_FRONT",
+    "CAM_B0": "CAM_BACK",
+    "CAM_L0": "CAM_FRONT_LEFT",
+    "CAM_R0": "CAM_FRONT_RIGHT",
+    "CAM_L2": "CAM_BACK_LEFT",
+    "CAM_R2": "CAM_BACK_RIGHT",
+}
+# nuScenes 官方六视角顺序（对齐 custom_nusc_map_converter 的 camera_types）
+NUSC_CAM_ORDER = ["CAM_FRONT", "CAM_FRONT_RIGHT", "CAM_FRONT_LEFT",
+                  "CAM_BACK", "CAM_BACK_LEFT", "CAM_BACK_RIGHT"]
+
 
 def build_sample_nuscenes(db_path: Path, r: NuPlanDBReader, frame: dict,
                           channels: list, patch_xy, pc_range, img_root: Path,
@@ -112,7 +125,8 @@ def build_sample_nuscenes(db_path: Path, r: NuPlanDBReader, frame: dict,
             [img_pose["x"], img_pose["y"], img_pose["z"]])
         cam_e2g = img_ego_se3 @ sensor2ego_se3
         # 假设 lidar 与 ego 重合（MapTRV2 不用 lidar），sensor2lidar == sensor2ego
-        cams[ch] = {
+        cam_key = NUSC_CAM_MAP.get(ch, ch)   # 键名对齐 nuScenes（如 CAM_F0 -> CAM_FRONT）
+        cams[cam_key] = {
             "data_path": str(img_root / img["filename"]),
             "type": "camera",
             "sample_data_token": img["token"],
@@ -125,6 +139,10 @@ def build_sample_nuscenes(db_path: Path, r: NuPlanDBReader, frame: dict,
             "timestamp": img["timestamp"],
             "cam_intrinsic": cam["intrinsic"],
         }
+
+    # 按 nuScenes 官方六视角顺序重排，使 info['cams'] 与 nuScenes 数据集完全一致
+    if cams and all(k in NUSC_CAM_ORDER for k in cams):
+        cams = {k: cams[k] for k in NUSC_CAM_ORDER if k in cams}
 
     info = {
         "lidar_path": frame["filename"],

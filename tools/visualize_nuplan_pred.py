@@ -43,6 +43,8 @@ def parse_args():
     ap.add_argument('--show-dir', default='reports/pred_vis')
     ap.add_argument('--num-samples', type=int, default=6)
     ap.add_argument('--score-thresh', type=float, default=0.3)
+    ap.add_argument('--ann-file', default=None,
+                    help='覆盖 test ann_file（如 nuscenes 小子集 info），默认用配置里的')
     ap.add_argument('--seed', type=int, default=None, help='随机采样种子，设置后随机取样本（覆盖不同 log/场景）')
     return ap.parse_args()
 
@@ -63,6 +65,8 @@ def main():
     cfg.model.pretrained = None
 
     cfg.data.test.test_mode = True
+    if args.ann_file is not None:
+        cfg.data.test.ann_file = args.ann_file
     samples_per_gpu = cfg.data.test.pop('samples_per_gpu', 1)
     if samples_per_gpu > 1:
         cfg.data.test.pipeline = replace_ImageToTensor(cfg.data.test.pipeline)

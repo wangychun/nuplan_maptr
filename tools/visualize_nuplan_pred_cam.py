@@ -59,8 +59,8 @@ def main():
     ap.add_argument('--show-dir', default='reports/pred_cam')
     ap.add_argument('--num-samples', type=int, default=4)
     ap.add_argument('--score-thresh', type=float, default=0.15)
-    ap.add_argument('--cam', default='CAM_FRONT,CAM_FRONT_LEFT,CAM_FRONT_RIGHT,CAM_BACK',
-                    help='相机名（nuScenes 命名），逗号分隔可画多个')
+    ap.add_argument('--cam', default='CAM_FRONT,CAM_FRONT_RIGHT,CAM_FRONT_LEFT,CAM_BACK,CAM_BACK_LEFT,CAM_BACK_RIGHT',
+                    help='相机名（nuScenes 命名），逗号分隔可画多个，默认 6 路全画')
     ap.add_argument('--ann-file', default=None,
                     help='覆盖 test ann_file（如 nuplan_val_eval_sub.pkl / nuscenes 子集），默认用配置里的')
     ap.add_argument('--seed', type=int, default=None, help='随机采样种子，设置后随机取样本（覆盖不同 log/场景）')
@@ -125,8 +125,15 @@ def main():
         metas = im_meta
         filenames = metas['filename']
         cam_list = [c.strip() for c in args.cam.split(',')]
+        # nuScenes 相机名 -> 磁盘目录名（build_nuplan_infos 的 data_path 用 nuPlan 原名，
+        # 如 CAM_FRONT 的目录是 CAM_F0）。--cam 传 nuScenes 名即可，内部自动映射。
+        NUSC_TO_NUPLAN = {
+            'CAM_FRONT': 'CAM_F0', 'CAM_FRONT_RIGHT': 'CAM_R0', 'CAM_FRONT_LEFT': 'CAM_L0',
+            'CAM_BACK': 'CAM_B0', 'CAM_BACK_LEFT': 'CAM_L2', 'CAM_BACK_RIGHT': 'CAM_R2',
+        }
         for cam_name in cam_list:
-            cam_idx = [j for j, f in enumerate(filenames) if '/' + cam_name + '/' in f]
+            disk_name = NUSC_TO_NUPLAN.get(cam_name, cam_name)
+            cam_idx = [j for j, f in enumerate(filenames) if '/' + disk_name + '/' in f]
             if not cam_idx:
                 print(f'[skip] cam {cam_name} not found in batch {i}')
                 continue

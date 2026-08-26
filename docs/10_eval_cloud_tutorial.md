@@ -235,16 +235,16 @@ python /data2/wyc/nuplan_maptrv2/tools/visualize_nuplan_pred.py \
   --num-samples 6 --score-thresh 0.3 \
   --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_sub.pkl
 
-# 相机叠加图（预测折线画在相机图上）
+# 相机叠加图（预测折线画在相机图上，默认 6 路全画；--cam 可只选几路）
 python /data2/wyc/nuplan_maptrv2/tools/visualize_nuplan_pred_cam.py \
   projects/configs/maptrv2/maptrv2_nuplan_full.py \
   /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
   --show-dir /data2/wyc/nuplan_maptrv2/reports/pred_cam_full \
-  --num-samples 4 --cam CAM_FRONT,CAM_FRONT_LEFT,CAM_FRONT_RIGHT,CAM_BACK \
+  --num-samples 4 \
   --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_sub.pkl
 ```
 
-> 注意：`--cam` 用 nuScenes 命名（CAM_FRONT 等，nuPlan info 的相机名已映射为这些）；`--ann-file` 必须传子集（避免无图像 log）。
+> 注意：`--cam` 用 nuScenes 命名（CAM_FRONT 等，默认 6 路），脚本会自动把 nuScenes 名映射回磁盘上的 nuPlan 目录名（CAM_FRONT→CAM_F0 等）；`--ann-file` 必须传子集（避免无图像 log）。
 > 输出 PNG 在 `--show-dir` 下，云服务器上可直接打开或下载。
 
 ### 4.2 nuScenes：BEV 预测可视化

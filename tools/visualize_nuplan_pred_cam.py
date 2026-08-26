@@ -59,7 +59,10 @@ def main():
     ap.add_argument('--show-dir', default='reports/pred_cam')
     ap.add_argument('--num-samples', type=int, default=4)
     ap.add_argument('--score-thresh', type=float, default=0.15)
-    ap.add_argument('--cam', default='CAM_F0,CAM_B0,CAM_L1,CAM_R1', help='相机名，逗号分隔可画多个，如 CAM_F0,CAM_B0,CAM_L1,CAM_R1')
+    ap.add_argument('--cam', default='CAM_FRONT,CAM_FRONT_LEFT,CAM_FRONT_RIGHT,CAM_BACK',
+                    help='相机名（nuScenes 命名），逗号分隔可画多个')
+    ap.add_argument('--ann-file', default=None,
+                    help='覆盖 test ann_file（如 nuplan_val_eval_sub.pkl / nuscenes 子集），默认用配置里的')
     ap.add_argument('--seed', type=int, default=None, help='随机采样种子，设置后随机取样本（覆盖不同 log/场景）')
     args = ap.parse_args()
 
@@ -73,6 +76,8 @@ def main():
         importlib.import_module(osp.dirname(cfg.plugin_dir).replace('/', '.'))
     cfg.model.pretrained = None
     cfg.data.test.test_mode = True
+    if args.ann_file is not None:
+        cfg.data.test.ann_file = args.ann_file
     samples_per_gpu = cfg.data.test.pop('samples_per_gpu', 1)
 
     dataset = build_dataset(cfg.data.test)

@@ -184,6 +184,13 @@ python /data2/wyc/nuplan_maptrv2/tools/test_evaluate.py \
   --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuplan_map_infos_full_val.pkl \
   --map-ann /data2/wyc/nuplan_maptrv2/data/infos/nuplan_map_anns_full_val.json \
   --max-samples 8
+
+python /data2/wyc/nuplan_maptrv2/tools/test_evaluate.py \
+  projects/configs/maptrv2/maptrv2_nuplan_full.py \
+  /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_sub.pkl \
+  --map-ann /data2/wyc/nuplan_maptrv2/data/infos/nuplan_map_anns_full_val_sub.json \
+  --max-samples 8
 ```
 
 > 第一次跑会生成 `nuplan_map_anns_full_val.json`（GT，脚本自动从 info 生成），稍等即可。
@@ -210,7 +217,10 @@ python /data2/wyc/nuplan_maptrv2/tools/test_evaluate.py \
 
 ## 4. 可视化（三个数据集）
 
-### 4.1 nuPlan：BEV 对比图（GT vs 预测）+ 相机叠加图
+### 4.1 nuPlan：BEV 对比图（GT vs 预测）+ 相机叠加图（用 val 子集）
+
+> ⚠️ **用 `nuplan_val_eval_sub.pkl`（8 个有图像覆盖的样本）而不是全量 val info**，否则可能抽到无图像的 log 报 `FileNotFoundError`（如 `.../2021.06.07.11.59.52_veh-35_00008_00083/CAM_F0/...jpg`）。
+> 前置：先解压子集 log 图像（见 2.1b 第 2 步，`--logs data/infos/nuplan_val_eval_logs.txt`）。
 
 ```bash
 cd /data2/wyc/nuplan_maptrv2/MapTRV2
@@ -222,17 +232,19 @@ python /data2/wyc/nuplan_maptrv2/tools/visualize_nuplan_pred.py \
   projects/configs/maptrv2/maptrv2_nuplan_full.py \
   /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
   --show-dir /data2/wyc/nuplan_maptrv2/reports/pred_vis_full \
-  --num-samples 6 --score-thresh 0.3
+  --num-samples 6 --score-thresh 0.3 \
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_sub.pkl
 
 # 相机叠加图（预测折线画在相机图上）
 python /data2/wyc/nuplan_maptrv2/tools/visualize_nuplan_pred_cam.py \
   projects/configs/maptrv2/maptrv2_nuplan_full.py \
   /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
   --show-dir /data2/wyc/nuplan_maptrv2/reports/pred_cam_full \
-  --num-samples 4 --cam CAM_FRONT,CAM_FRONT_LEFT,CAM_FRONT_RIGHT,CAM_BACK
+  --num-samples 4 --cam CAM_FRONT,CAM_FRONT_LEFT,CAM_FRONT_RIGHT,CAM_BACK \
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_sub.pkl
 ```
 
-> 注意：nuPlan info 的相机名已映射为 nuScenes 命名（CAM_FRONT 等），`--cam` 用 nuScenes 名。
+> 注意：`--cam` 用 nuScenes 命名（CAM_FRONT 等，nuPlan info 的相机名已映射为这些）；`--ann-file` 必须传子集（避免无图像 log）。
 > 输出 PNG 在 `--show-dir` 下，云服务器上可直接打开或下载。
 
 ### 4.2 nuScenes：BEV 预测可视化

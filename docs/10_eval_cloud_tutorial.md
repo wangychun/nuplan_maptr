@@ -60,9 +60,32 @@ export CUDA_VISIBLE_DEVICES=0
 
 ## 2. 准备评测数据（三个数据集）
 
-### 2.1 nuPlan（无需准备，直接用全量 val info）
+### 2.1 nuPlan（前置：确保 val 图像已解压）
 
-直接用现成 info，评测时用 `--max-samples` 抽少量即可，见第 3 节。
+> ⚠️ **val 图像必须已解压**。之前 3.1 报 `FileNotFoundError: .../raw/nuplan_full/sensor_blobs/2021.06.07.../CAM_F0/xxx.jpg`
+> 就是因为 **val 的 1381 个 log 图像从未解压**（train 解压过、val 没跑）。
+> 检查：`ls raw/nuplan_full/sensor_blobs/ | wc -l` 应约 **2466**（train 1085 + val 1381）；如果只有 1085，说明 val 未解压。
+
+**在本机后台启动 val 图像解压**（数据在 `/data2/wyc`，云服务器 NFS 直接读到；断线不影响）：
+
+```bash
+cd /data2/wyc/nuplan_maptrv2
+nohup /data2/30033/nuplan-devkit/miniconda3/envs/nuplan/bin/python tools/extract_sensor_images.py \
+  --blobs-root /data2/han/nuplan/archives/nuplan-v1.1/sensor_blobs/val_set \
+  --index reports/sensor_blobs_index_full_val.json \
+  --db-dir raw/nuplan_full/dbs \
+  --logs configs/splits/full_val_logs.txt \
+  --out raw/nuplan_full/sensor_blobs \
+  --frame-stride 10 \
+  --skip-existing \
+  > work_dirs/extract_full_val.log 2>&1 &
+```
+
+- 进度：`tail -f work_dirs/extract_full_val.log`，看到 `done: extracted N, skipped 0 -> raw/nuplan_full/sensor_blobs` 即完成。
+- 验证：`ls raw/nuplan_full/sensor_blobs/ | wc -l` 到约 2466。
+- 完成后再到云服务器跑第 3 节 nuPlan 评测。
+
+直接用全量 val info，评测时用 `--max-samples` 抽少量即可，见第 3 节。
 
 ### 2.2 nuScenes：修正 info 路径 + 抽小子集
 
@@ -215,7 +238,7 @@ python /data2/wyc/nuplan_maptrv2/tools/visualize_nvidia_pred.py \
 
 | 现象 | 处理 |
 |---|---|
-| `FileNotFoundError: img file does not exist` | info 里 data_path 仍是相对路径；重跑 2.2（nuscenes）或确认 nvidia info 绝对路径 |
+| `FileNotFoundError: img file does not exist` | nuPlan val 图像未解压 → 先跑 2.1 的 val 解压；若是 nuScenes → info 里 data_path 是相对路径，重跑 2.2 |
 | `KeyError: 'metadata'` | info 顶层缺 metadata；nuScenes/NVIDIA 生成脚本已带，旧文件用 `python -c "..."` 补 `d['metadata']={'version':'x'}` |
 | `No module named 'projects'` | 没设 `PYTHONPATH=/data2/wyc/nuplan_maptrv2/MapTRV2` |
 | 评测 mAP 为 0 / 很低 | 训练还没收敛（现在才 epoch 5，loss 24）；或 GT 生成方式与训练配置不一致，先看可视化图判断预测是否合理 |

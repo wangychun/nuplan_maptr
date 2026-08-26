@@ -87,6 +87,42 @@ nohup /data2/30033/nuplan-devkit/miniconda3/envs/nuplan/bin/python tools/extract
 
 直接用全量 val info，评测时用 `--max-samples` 抽少量即可，见第 3 节。
 
+### 2.1b 若 val 传感器分卷不完整（只覆盖部分 log）→ 用子集方案
+
+> 当前 val_set 只有 24 个分卷，覆盖 **225/1381** 个 val log，其余 log **无图像**，
+> 全量解压/全量 eval 会报 `no archive for <log>/CAM_*`。只需要少量样本时用子集方案：
+
+```bash
+# 1) 生成“有图像覆盖”的 eval 子集 info + log 名单（秒级，本机或云服务器均可）
+PY=/data2/30033/nuplan-devkit/miniconda3/envs/nuplan/bin/python
+"$PY" /data2/wyc/nuplan_maptrv2/tools/make_val_eval_subset.py \
+  --infos /data2/wyc/nuplan_maptrv2/data/infos/nuplan_map_infos_full_val.pkl \
+  --index /data2/wyc/nuplan_maptrv2/reports/sensor_blobs_index_full_val.json \
+  --max-samples 8 \
+  --out-info /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_sub.pkl \
+  --out-logs /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_logs.txt
+
+# 2) 解压名单里的 log 图像（本机后台；名单只有 1~2 个 log，很快）
+cd /data2/wyc/nuplan_maptrv2
+nohup /data2/30033/nuplan-devkit/miniconda3/envs/nuplan/bin/python tools/extract_sensor_images.py \
+  --blobs-root /data2/han/nuplan/archives/nuplan-v1.1/sensor_blobs/val_set \
+  --index reports/sensor_blobs_index_full_val.json \
+  --db-dir raw/nuplan_full/dbs \
+  --logs data/infos/nuplan_val_eval_logs.txt \
+  --out raw/nuplan_full/sensor_blobs \
+  --frame-stride 10 --skip-existing \
+  > work_dirs/extract_full_val_sub.log 2>&1 &
+
+# 3) 云服务器用子集 info 评测（map-ann 传一个新路径，脚本会自动生成对应 GT）
+python tools/test_evaluate.py projects/configs/maptrv2/maptrv2_nuplan_full.py \
+  /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuplan_val_eval_sub.pkl \
+  --map-ann /data2/wyc/nuplan_maptrv2/data/infos/nuplan_map_anns_full_val_sub.json \
+  --max-samples 8
+```
+
+> ✅ **本机已生成**：`data/infos/nuplan_val_eval_sub.pkl`（8 样本，涉及 log `2021.06.07.11.59.52_veh-35_02283_02464`）与 `data/infos/nuplan_val_eval_logs.txt`。只需跑第 2 步解压即可。
+
 ### 2.2 nuScenes：修正 info 路径 + 抽小子集
 
 > ✅ **本机已生成**：`/data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub.pkl`（**8 个样本**，data_path 已绝对化）。云服务器直接用它即可；如需改样本数再执行下面命令。
@@ -239,6 +275,7 @@ python /data2/wyc/nuplan_maptrv2/tools/visualize_nvidia_pred.py \
 | 现象 | 处理 |
 |---|---|
 | `FileNotFoundError: img file does not exist` | nuPlan val 图像未解压 → 先跑 2.1 的 val 解压；若是 nuScenes → info 里 data_path 是相对路径，重跑 2.2 |
+| `FileNotFoundError: no archive for <log>/CAM_*`（val 解压/eval） | val 传感器分卷不完整（只覆盖 225/1381 log）；用 2.1b 子集方案，只解压/eval 有图像覆盖的 log |
 | `KeyError: 'metadata'` | info 顶层缺 metadata；nuScenes/NVIDIA 生成脚本已带，旧文件用 `python -c "..."` 补 `d['metadata']={'version':'x'}` |
 | `No module named 'projects'` | 没设 `PYTHONPATH=/data2/wyc/nuplan_maptrv2/MapTRV2` |
 | 评测 mAP 为 0 / 很低 | 训练还没收敛（现在才 epoch 5，loss 24）；或 GT 生成方式与训练配置不一致，先看可视化图判断预测是否合理 |

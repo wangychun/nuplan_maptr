@@ -28,7 +28,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--infos", required=True)
     ap.add_argument("--index", required=True)
-    ap.add_argument("--max-samples", type=int, default=8)
+    ap.add_argument("--max-samples", type=int, default=0, help="最多样本数；0=全部有图像覆盖的样本")
+    ap.add_argument("--frame-stride", type=int, default=1,
+                    help="帧采样间隔；需与解压 --frame-stride 一致（info 全帧时按 frame_idx%stride==0 筛选）")
     ap.add_argument("--out-info", required=True)
     ap.add_argument("--out-logs", required=True)
     args = ap.parse_args()
@@ -49,11 +51,13 @@ def main():
         log = s["scene_token"]
         if log not in covered:
             continue
+        if s.get("frame_idx", 0) % args.frame_stride:
+            continue
         sel.append(s)
         if log not in seen:
             seen.add(log)
             logs.append(log)
-        if len(sel) >= args.max_samples:
+        if args.max_samples and len(sel) >= args.max_samples:
             break
     print(f"抽到样本: {len(sel)}, 涉及 log: {len(logs)}")
 

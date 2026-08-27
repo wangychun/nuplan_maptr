@@ -19,6 +19,7 @@ import sys
 
 import numpy as np
 import torch
+import mmcv
 from mmcv import Config
 from mmcv.parallel import MMDataParallel
 from mmcv.runner import load_checkpoint

@@ -1,0 +1,187 @@
+WARNING!!!!, Only can be used for obtain inference speed!!!!
+test samples: 8
+load checkpoint from local path: work_dirs/full/epoch_7.pth
+running inference ...
+[                                                  ] 0/8, elapsed: 0s, ETA:/home/bicv01/miniforge3/envs/maptr/lib/python3.8/site-packages/mmcv/cnn/bricks/transformer.py:341: UserWarning: The arguments `feedforward_channels` in BaseTransformerLayer has been deprecated, now you should set `feedforward_channels` and other FFN related arguments to a dict named `ffn_cfgs`. 
+  warnings.warn(
+/home/bicv01/miniforge3/envs/maptr/lib/python3.8/site-packages/mmcv/cnn/bricks/transformer.py:341: UserWarning: The arguments `ffn_dropout` in BaseTransformerLayer has been deprecated, now you should set `ffn_drop` and other FFN related arguments to a dict named `ffn_cfgs`. 
+  warnings.warn(
+/home/bicv01/miniforge3/envs/maptr/lib/python3.8/site-packages/mmcv/cnn/bricks/transformer.py:341: UserWarning: The arguments `ffn_num_fcs` in BaseTransformerLayer has been deprecated, now you should set `num_fcs` and other FFN related arguments to a dict named `ffn_cfgs`. 
+  warnings.warn(
+/home/bicv01/miniforge3/envs/maptr/lib/python3.8/site-packages/mmcv/cnn/bricks/transformer.py:92: UserWarning: The arguments `dropout` in MultiheadAttention has been deprecated, now you can separately set `attn_drop`(float), proj_drop(float), and `dropout_layer`(dict) 
+  warnings.warn('The arguments `dropout` in MultiheadAttention '
+[>>>>                               ] 1/8, 1.3 task/s, elapsed: 1s, ETA:     5s[>>>>>>>>                           ] 2/8, 2.4 task/s, elapsed: 1s, ETA:     3s[>>>>>>>>>>>>>                      ] 3/8, 2.8 task/s, elapsed: 1s, ETA:     2s[>>>>>>>>>>>>>>>>>                  ] 4/8, 3.5 task/s, elapsed: 1s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>              ] 5/8, 3.5 task/s, elapsed: 1s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>         ] 6/8, 4.0 task/s, elapsed: 2s, ETA:     1s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>     ] 7/8, 3.8 task/s, elapsed: 2s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 8/8, 4.2 task/s, elapsed: 2s, ETA:     0sevaluating ...
+
+Formating bboxes of pts_bbox
+Start to convert map detection format...
+[                                                  ] 0/8, elapsed: 0s, ETA:[>>>>                            ] 1/8, 6765.0 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>                        ] 2/8, 6710.9 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>                    ] 3/8, 7235.7 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>                ] 4/8, 7664.3 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>            ] 5/8, 8059.8 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>>>>>        ] 6/8, 8316.5 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>    ] 7/8, 8272.8 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 8/8, 8458.4 task/s, elapsed: 0s, ETA:     0s
+Start to convert gt map format...
+[                                                  ] 0/8, elapsed: 0s, ETA:[>>>>                             ] 1/8, 755.9 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>                         ] 2/8, 811.7 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>                     ] 3/8, 841.6 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>                 ] 4/8, 856.8 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>             ] 5/8, 868.8 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>>>>>         ] 6/8, 874.6 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>     ] 7/8, 881.8 task/s, elapsed: 0s, ETA:     0s[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 8/8, 879.4 task/s, elapsed: 0s, ETA:     0s
+ GT anns writes to data/infos/nuplan_map_anns_full_val_sub_epoch_7.json
+Results writes to /tmp/tmp16xn7brs/results/pts_bbox/nuscmap_results.json
+Evaluating bboxes of pts_bbox
+Formating results & gts by classes
+results path: /tmp/tmp16xn7brs/results/pts_bbox/nuscmap_results.json
+/home/bicv01/miniforge3/envs/maptr/lib/python3.8/site-packages/torch/_tensor.py:575: UserWarning: floor_divide is deprecated, and will be removed in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values.
+To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor'). (Triggered internally at  ../aten/src/ATen/native/BinaryOps.cpp:467.)
+  return torch.floor_divide(self, other)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/core/bbox/coders/nms_free_coder.py:266: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self.post_center_range = torch.tensor(
+Formatting ...
+Cls data formatting done in 3.008098s!! with /tmp/tmp16xn7brs/results/pts_bbox/cls_formatted.pkl
+-*-*-*-*-*-*-*-*-*-*use metric:chamfer-*-*-*-*-*-*-*-*-*-*
+-*-*-*-*-*-*-*-*-*-*threshhold:0.5-*-*-*-*-*-*-*-*-*-*
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+cls:divider done in 2.289177s!!
+cls:ped_crossing done in 0.002336s!!
+cls:boundary done in 0.347729s!!
+
++--------------+-----+------+--------+-------+
+| class        | gts | dets | recall | ap    |
++--------------+-----+------+--------+-------+
+| divider      | 64  | 138  | 0.500  | 0.452 |
+| ped_crossing | 0   | 7    | 0.000  | 0.000 |
+| boundary     | 112 | 255  | 0.000  | 0.000 |
++--------------+-----+------+--------+-------+
+| mAP          |     |      |        | 0.226 |
++--------------+-----+------+--------+-------+
+-*-*-*-*-*-*-*-*-*-*threshhold:1.0-*-*-*-*-*-*-*-*-*-*
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+cls:divider done in 1.917388s!!
+cls:ped_crossing done in 0.002104s!!
+cls:boundary done in 0.063066s!!
+
++--------------+-----+------+--------+-------+
+| class        | gts | dets | recall | ap    |
++--------------+-----+------+--------+-------+
+| divider      | 64  | 138  | 0.500  | 0.452 |
+| ped_crossing | 0   | 7    | 0.000  | 0.000 |
+| boundary     | 112 | 255  | 0.116  | 0.011 |
++--------------+-----+------+--------+-------+
+| mAP          |     |      |        | 0.232 |
++--------------+-----+------+--------+-------+
+-*-*-*-*-*-*-*-*-*-*threshhold:1.5-*-*-*-*-*-*-*-*-*-*
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+/data2/wyc/nuplan_maptrv2/tools/../MapTRV2/projects/mmdet3d_plugin/datasets/map_utils/tpfp_chamfer.py:35: ShapelyDeprecationWarning: STRtree will be changed in 2.0.0 and will not be compatible with versions < 2.
+  tree = STRtree(pred_lines_shapely)
+cls:divider done in 1.985282s!!
+cls:ped_crossing done in 0.002420s!!
+cls:boundary done in 0.055361s!!
+
++--------------+-----+------+--------+-------+
+| class        | gts | dets | recall | ap    |
++--------------+-----+------+--------+-------+
+| divider      | 64  | 138  | 0.625  | 0.491 |
+| ped_crossing | 0   | 7    | 0.000  | 0.000 |
+| boundary     | 112 | 255  | 0.357  | 0.114 |
++--------------+-----+------+--------+-------+
+| mAP          |     |      |        | 0.302 |
++--------------+-----+------+--------+-------+
+divider: 0.46512289841969806
+ped_crossing: 0.0
+boundary: 0.04166561675568422
+map: 0.16892950505846074
+  NuscMap_chamfer/divider_AP: 0.4651
+  NuscMap_chamfer/ped_crossing_AP: 0.0000
+  NuscMap_chamfer/boundary_AP: 0.0417
+  NuscMap_chamfer/mAP: 0.1689
+  NuscMap_chamfer/divider_AP_thr_0.5: 0.4524
+  NuscMap_chamfer/divider_AP_thr_1.0: 0.4524
+  NuscMap_chamfer/divider_AP_thr_1.5: 0.4906
+  NuscMap_chamfer/ped_crossing_AP_thr_0.5: 0.0000
+  NuscMap_chamfer/ped_crossing_AP_thr_1.0: 0.0000
+  NuscMap_chamfer/ped_crossing_AP_thr_1.5: 0.0000
+  NuscMap_chamfer/boundary_AP_thr_0.5: 0.0000
+  NuscMap_chamfer/boundary_AP_thr_1.0: 0.0112
+  NuscMap_chamfer/boundary_AP_thr_1.5: 0.1138

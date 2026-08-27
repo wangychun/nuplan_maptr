@@ -27,3 +27,10 @@ nohup.out
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# ===== 评测产物（PNG/大目录不入库；指标结果在 reports/eval_nuplan/*.txt、reports/README.md、docs/11_eval_summary.md）=====
+reports/vis_*/
+reports/nuscenes/
+reports/nvidia/
+reports/eval_nusc/
+reports/eval_nvidia/

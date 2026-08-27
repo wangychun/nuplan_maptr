@@ -30,10 +30,11 @@ import projects.mmdet3d_plugin  # noqa: F401  触发注册
 from projects.mmdet3d_plugin.datasets.builder import build_dataloader
 from mmdet3d.datasets import build_dataset
 
-# divider / ped_crossing / boundary / centerline（第 4 类仅 nuScenes 模型会输出）
+# 类别颜色与名称（根据 config 的 map_classes 动态确定类别数；最多 4 类）
 COLORS = ['red', 'green', 'blue', 'orange']
-NAMES = ['divider', 'ped_crossing', 'boundary', 'centerline']
-N_CLASSES = 4
+DEFAULT_NAMES = ['divider', 'ped_crossing', 'boundary', 'centerline']
+NAMES = list(DEFAULT_NAMES)
+N_CLASSES = 3  # 默认 3 类；main 里根据 config map_classes 更新
 
 
 def parse_args():
@@ -63,6 +64,12 @@ def main():
             import importlib
             importlib.import_module(_module_path)
     cfg.model.pretrained = None
+
+    # 按 config 的 map_classes 动态确定类别数（nuPlan 3 类 / nuScenes 4 类）
+    global N_CLASSES, NAMES
+    cfg_map_classes = list(getattr(cfg, 'map_classes', ['divider', 'ped_crossing', 'boundary']))
+    N_CLASSES = len(cfg_map_classes)
+    NAMES = list(cfg_map_classes)  # 只保留 config 实际类别，避免多出 centerline 图例
 
     cfg.data.test.test_mode = True
     if args.ann_file is not None:
@@ -140,7 +147,7 @@ def main():
             if lab < 0 or lab >= N_CLASSES:
                 continue
             coords = np.array(list(inst.coords))
-            ls = '-.' if lab == 3 else '-'
+            ls = '-.' if N_CLASSES > 3 and lab == 3 else '-'
             ax.plot(coords[:, 0], coords[:, 1], color=COLORS[lab], lw=1.5, alpha=0.45, ls=ls)
         # pred 虚线（粗、深色）；centerline(3) 用点划样式
         for s, lab, p in zip(scores[keep], labels[keep], pts[keep]):
@@ -148,14 +155,14 @@ def main():
             if lab >= N_CLASSES:
                 continue
             p = p.numpy()
-            ls = '-.' if lab == 3 else '--'
+            ls = '-.' if N_CLASSES > 3 and lab == 3 else '--'
             ax.plot(p[:, 0], p[:, 1], color=COLORS[lab], lw=2.8, ls=ls, alpha=1.0)
         # 图例：N 类 × GT/Pred
         import matplotlib.lines as mlines
         legend_handles = []
         for ci, cname in enumerate(NAMES):
-            ls = '-.' if ci == 3 else '-'
-            ls2 = '-.' if ci == 3 else '--'
+            ls = '-.' if N_CLASSES > 3 and ci == 3 else '-'
+            ls2 = '-.' if N_CLASSES > 3 and ci == 3 else '--'
             legend_handles.append(mlines.Line2D([], [], color=COLORS[ci], lw=1.5, alpha=0.45, ls=ls,
                                                 label=f'{cname} (GT)'))
             legend_handles.append(mlines.Line2D([], [], color=COLORS[ci], lw=2.8, ls=ls2, alpha=1.0,

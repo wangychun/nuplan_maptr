@@ -19,7 +19,10 @@
 | nuPlan 训练配置 | `/data2/wyc/nuplan_maptrv2/MapTRV2/projects/configs/maptrv2/maptrv2_nuplan_full.py` |
 | nuScenes 原始数据 | `/data2/nuscenes/`（samples/sweeps/v1.0-trainval/maps） |
 | nuScenes 现成 info（官方生成） | `/data2/nuscenes/nuscenes_map_infos_temporal_val.pkl` |
-| nuScenes 评测 GT | `/data2/nuscenes/nuscenes_map_anns_val.json` |
+| nuScenes 评测小子集 info（✅ 原始坐标+绝对路径） | `/data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl` |
+| nuScenes 评测配置（✅ scale=0.5，3 类） | `/data2/wyc/nuplan_maptrv2/MapTRV2/projects/configs/maptrv2/maptrv2_nusc_official_eval_3cls_align.py` |
+| 官方 nuScenes 权重（3 类适配，链路验证） | `/data2/wyc/nuplan_maptrv2/MapTRV2/ckpts/maptrv2_nusc_adapted_nuplan.pth` |
+| 官方 4 类模型（参考） | `/data2/wyc/nuplan_maptrv2/MapTRV2/ckpts/maptrv2_nusc_r50_24ep_w_centerline.pth` |
 | NVIDIA 原始数据 | `/data2/wyc/nuplan_maptrv2/MapTRV2/data/nvidia/raw1/pai_subset/`（7 路相机 mp4 + 标定 + egomotion） |
 
 模型说明：当前 checkpoint 是 **nuPlan 训练的 MapTRV2**：6 相机、3 类地图
@@ -123,9 +126,11 @@ python tools/test_evaluate.py projects/configs/maptrv2/maptrv2_nuplan_full.py \
 
 > ✅ **本机已生成**：`data/infos/nuplan_val_eval_sub.pkl`（8 样本，涉及 log `2021.06.07.11.59.52_veh-35_02283_02464`）与 `data/infos/nuplan_val_eval_logs.txt`。只需跑第 2 步解压即可。
 
-### 2.2 nuScenes：修正 info 路径 + 抽小子集
+### 2.2 nuScenes：修正 info 路径 + 抽小子集（⚠️ 不要 x/y swap）
 
-> ✅ **本机已生成**：`/data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub.pkl`（**8 个样本**，data_path 已绝对化）。云服务器直接用它即可；如需改样本数再执行下面命令。
+> ✅ **本机已生成**：`/data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl`
+> （**8 个样本**，data_path 已绝对化，**annotation 保持原始 (x,y) 坐标**）。云服务器直接用它即可；
+> 如需改样本数再执行下面命令。
 
 nuScenes 现成 info 里的 `data_path` 是相对路径 `./data/nuscenes/samples/...`（在别处生成时留下的），
 需要改成绝对路径 `/data2/nuscenes/samples/...`，并抽一个小子集，方便云服务器只读少量样本。
@@ -137,9 +142,13 @@ PY=/data2/30033/nuplan-devkit/miniconda3/envs/nuplan/bin/python
   --infos /data2/nuscenes/nuscenes_map_infos_temporal_val.pkl \
   --nuscenes-root /data2/nuscenes \
   --max-samples 8 \
-  --out /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub.pkl
+  --out /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl
 ```
 
+> ⚠️ **重要**：`fix_nuscenes_infos_path.py` 只改 `data_path`，**不碰 annotation 坐标**。
+> nuScenes annotation 的原始 `(x,y)` 坐标**本来就是正确的**，与 MapTRv2 的局部坐标系
+> （x 横向 ±15m、y 纵向/车头 ±30m）一致。**不要做 x/y swap**（`fix_nuscenes_xy.py` 已废弃）——
+> swap 会把 GT 旋转 90°，导致评测 mAP=0 且 cam 投影"boundary 横着/飘在空中"。
 > 说明：脚本会把 `./data/nuscenes/` 前缀替换成 `/data2/nuscenes/`，只保留前 8 个样本。
 > 若云服务器**只挂载了 /data2/wyc 没挂 /data2/nuscenes**，请改用 `--copy-images-to` 参数，
 > 把这 8 个样本的图像拷贝到 `/data2/wyc/.../eval_nuscenes_sub/` 下并改写成指向该目录的绝对路径。
@@ -196,22 +205,42 @@ python /data2/wyc/nuplan_maptrv2/tools/test_evaluate.py \
 > 第一次跑会生成 `nuplan_map_anns_full_val.json`（GT，脚本自动从 info 生成），稍等即可。
 > 输出示例：`NuscMap_chamfer/mAP: 0.xxxx, NuscMap_chamfer/divider_AP: ...` 等。
 
-### 3.2 nuScenes（抽 8 个样本）
+### 3.2 nuScenes（抽 8 个样本，⚠️ 必须用 scale=0.5 配置）
+
+> ⚠️ **官方 nuScenes 模型训练分辨率是 scale=0.5（800×450）**，评测 nuScenes 必须用
+> `maptrv2_nusc_official_eval_3cls_align.py`（3 类、scale=0.5）。
+> **坑**：用 `maptrv2_nusc_eval_align.py`（scale=0.6，960×540）会得到**假象 mAP=0**——
+> 给模型喂与训练不一致分辨率的图，即使是官方 nuScenes 模型也输出 0。
 
 ```bash
 cd /data2/wyc/nuplan_maptrv2/MapTRV2
 export PYTHONPATH=/data2/wyc/nuplan_maptrv2/MapTRV2
 export CUDA_VISIBLE_DEVICES=0
 
+# 用原始坐标 info + 新 map-ann（首次跑会自动生成 GT json）
+rm -f /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_anns_eval_sub_orig.json
 python /data2/wyc/nuplan_maptrv2/tools/test_evaluate.py \
-  projects/configs/maptrv2/maptrv2_nuplan_full.py \
+  projects/configs/maptrv2/maptrv2_nusc_official_eval_3cls_align.py \
   /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
-  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub.pkl \
-  --map-ann /data2/nuscenes/nuscenes_map_anns_val.json \
-  --max-samples 8
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl \
+  --map-ann /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_anns_eval_sub_orig.json
 ```
 
-> 若 `nuscenes_map_infos_eval_sub.pkl` 未生成，先跑 2.2。
+> ⚠️ `--map-ann` 必须传一个**新路径**（或先 `rm` 旧 json）：`_format_gt()` 只在 GT json
+> 不存在时才会用 `vectormap_pipeline` 重新生成；若文件已存在会直接读旧的（可能坐标不对）。
+> 若 `nuscenes_map_infos_eval_sub_orig_path.pkl` 未生成，先跑 2.2。
+
+**评测链路正确性验证（可选）**：用**官方 nuScenes 权重（3 类适配版）**在同样 8 样本、同样
+scale=0.5 配置下做严格对照（backbone 与官方逐字节一致，仅截分类头为 3 类）。若官方 mAP 明显高
+（≈0.21），说明评测链路与坐标都正确，nuPlan 模型跨域 mAP 低是真实泛化差。
+
+```bash
+python /data2/wyc/nuplan_maptrv2/tools/test_evaluate.py \
+  projects/configs/maptrv2/maptrv2_nusc_official_eval_3cls_align.py \
+  /data2/wyc/nuplan_maptrv2/MapTRV2/ckpts/maptrv2_nusc_adapted_nuplan.pth \
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl \
+  --map-ann /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_anns_official3cls_05.json
+```
 
 ---
 
@@ -247,7 +276,7 @@ python /data2/wyc/nuplan_maptrv2/tools/visualize_nuplan_pred_cam.py \
 > 注意：`--cam` 用 nuScenes 命名（CAM_FRONT 等，默认 6 路），脚本会自动把 nuScenes 名映射回磁盘上的 nuPlan 目录名（CAM_FRONT→CAM_F0 等）；`--ann-file` 必须传子集（避免无图像 log）。
 > 输出 PNG 在 `--show-dir` 下，云服务器上可直接打开或下载。
 
-### 4.2 nuScenes：BEV 预测可视化
+### 4.2 nuScenes：BEV 预测可视化 + 相机投影（用原始坐标 info）
 
 ```bash
 cd /data2/wyc/nuplan_maptrv2/MapTRV2
@@ -256,14 +285,23 @@ export CUDA_VISIBLE_DEVICES=0
 
 # 用 nuscenes 小子集 info 做预测可视化（GT vs 预测，BEV）
 python /data2/wyc/nuplan_maptrv2/tools/visualize_nuplan_pred.py \
-  projects/configs/maptrv2/maptrv2_nuplan_full.py \
+  projects/configs/maptrv2/maptrv2_nusc_official_eval_3cls_align.py \
   /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
   --show-dir /data2/wyc/nuplan_maptrv2/reports/pred_vis_nusc \
   --num-samples 6 --score-thresh 0.3 \
-  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub.pkl
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl
+
+# 相机叠加图（GT 真值投影到相机图，验证投影是否正确贴合道路）
+python /data2/wyc/nuplan_maptrv2/tools/visualize_nuplan_pred_cam.py \
+  projects/configs/maptrv2/maptrv2_nusc_official_eval_3cls_align.py \
+  /data2/wyc/nuplan_maptrv2/work_dirs/full/latest.pth \
+  --show-dir /data2/wyc/nuplan_maptrv2/reports/pred_cam_nusc \
+  --num-samples 4 \
+  --ann-file /data2/wyc/nuplan_maptrv2/data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl
 ```
 
-> `visualize_nuplan_pred.py` 若支持 `--ann-file` 就直接传；否则复制一份配置把 `data.test.ann_file` 指过去。
+> 用**原始坐标 info** 时，cam 图上 GT 会正确沿道路方向延伸（透视到远方）；
+> 若看到 GT"横向穿屏/飘在空中"，说明误用了 swap 过的坐标（见 2.2 警告）。
 
 ### 4.3 NVIDIA：预测可视化（无 GT，只画预测折线）
 
@@ -290,7 +328,8 @@ python /data2/wyc/nuplan_maptrv2/tools/visualize_nvidia_pred.py \
 | `FileNotFoundError: no archive for <log>/CAM_*`（val 解压/eval） | val 传感器分卷不完整（只覆盖 225/1381 log）；用 2.1b 子集方案，只解压/eval 有图像覆盖的 log |
 | `KeyError: 'metadata'` | info 顶层缺 metadata；nuScenes/NVIDIA 生成脚本已带，旧文件用 `python -c "..."` 补 `d['metadata']={'version':'x'}` |
 | `No module named 'projects'` | 没设 `PYTHONPATH=/data2/wyc/nuplan_maptrv2/MapTRV2` |
-| 评测 mAP 为 0 / 很低 | 训练还没收敛（现在才 epoch 5，loss 24）；或 GT 生成方式与训练配置不一致，先看可视化图判断预测是否合理 |
+| 评测 mAP 为 0 / 很低 | 先确认**没用 swap 过的坐标**（见 2.2）；再用官方 nuScenes 模型同域评测验证链路（见 3.2）；nuPlan 模型跨域 nuScenes mAP≈0.001 是真实泛化差 |
+| cam 图上 GT 横向穿屏/飘在空中 | 用了 swap 过的坐标；改用原始坐标 info `nuscenes_map_infos_eval_sub_orig_path.pkl` |
 | NVIDIA 可视化无输出/全空 | 鱼眼内参是近似 K，预测可能不准；加大 `--score-thresh` 观察 |
 | 云服务器内存/显存不足 | `--max-samples` 调小到 3~4，或单卡跑 |
 
@@ -298,26 +337,41 @@ python /data2/wyc/nuplan_maptrv2/tools/visualize_nvidia_pred.py \
 
 ## 6. 小结（一条龙命令）
 
+### 6.1 一键评测脚本（推荐，换 checkpoint 直接用）
+
+```bash
+cd /data2/wyc/nuplan_maptrv2
+bash tools/run_eval.sh work_dirs/full/latest.pth          # 评测最新 checkpoint
+bash tools/run_eval.sh work_dirs/full/epoch_7.pth         # 指定 checkpoint
+bash tools/run_eval.sh work_dirs/full/epoch_7.pth --skip-nuplan   # 只跑 nuScenes
+bash tools/run_eval.sh work_dirs/full/epoch_7.pth --skip-nusc    # 只跑 nuPlan
+```
+
+- 自动跑：nuPlan 同域 Chamfer → nuScenes 跨域 Chamfer（原始坐标不 swap）→ cam 可视化（z=-1.6）
+- 自动删旧 map_ann json、用原始坐标 info；结果存 `reports/eval_{nuplan,nusc}/chamfer_<tag>.txt`
+
+### 6.2 手动命令（等价）
+
 ```bash
 # 0) 环境变量
 export PYTHONPATH=/data2/wyc/nuplan_maptrv2/MapTRV2
 export CUDA_VISIBLE_DEVICES=0
 
-# 1) nuScenes 小子集（本机生成一次）
+# 1) nuScenes 小子集（本机生成一次；原始坐标，不要 swap）
 PY=/data2/30033/nuplan-devkit/miniconda3/envs/nuplan/bin/python
 "$PY" tools/fix_nuscenes_infos_path.py --infos /data2/nuscenes/nuscenes_map_infos_temporal_val.pkl \
   --nuscenes-root /data2/nuscenes --max-samples 8 \
-  --out data/infos/nuscenes_map_infos_eval_sub.pkl
+  --out data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl
 
 # 2) nuPlan 指标
 python tools/test_evaluate.py projects/configs/maptrv2/maptrv2_nuplan_full.py \
-  work_dirs/full/latest.pth --ann-file data/infos/nuplan_map_infos_full_val.pkl \
-  --map-ann data/infos/nuplan_map_anns_full_val.json --max-samples 8
+  work_dirs/full/latest.pth --ann-file data/infos/nuplan_val_eval_sub.pkl \
+  --map-ann data/infos/nuplan_map_anns_full_val_sub.json
 
-# 3) nuScenes 指标
-python tools/test_evaluate.py projects/configs/maptrv2/maptrv2_nuplan_full.py \
-  work_dirs/full/latest.pth --ann-file data/infos/nuscenes_map_infos_eval_sub.pkl \
-  --map-ann /data2/nuscenes/nuscenes_map_anns_val.json --max-samples 8
+# 3) nuScenes 指标（scale=0.5 配置，原始坐标 info，新 map-ann 自动生成 GT）
+python tools/test_evaluate.py projects/configs/maptrv2/maptrv2_nusc_official_eval_3cls_align.py \
+  work_dirs/full/latest.pth --ann-file data/infos/nuscenes_map_infos_eval_sub_orig_path.pkl \
+  --map-ann data/infos/nuscenes_map_anns_eval_sub_orig.json
 
 # 4) nuPlan 可视化
 python tools/visualize_nuplan_pred.py projects/configs/maptrv2/maptrv2_nuplan_full.py \

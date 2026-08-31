@@ -34,6 +34,9 @@ def main():
     ap.add_argument('--ann-file', required=True)
     ap.add_argument('--map-ann', default='/data2/wyc/nuplan_maptrv2/data/infos/nuplan_map_anns_test.json')
     ap.add_argument('--max-samples', type=int, default=0)
+    ap.add_argument('--shard-idx', type=int, default=0, help='分片号（0-based）')
+    ap.add_argument('--shard-total', type=int, default=1, help='分片总数')
+    ap.add_argument('--out', default=None, help='只推理并保存结果 pkl，不 evaluate（多卡分片合并用）')
     args = ap.parse_args()
 
     cfg = Config.fromfile(args.config)
@@ -50,6 +53,9 @@ def main():
     dataset = build_dataset(cfg.data.test)
     if args.max_samples:
         dataset.data_infos = dataset.data_infos[: args.max_samples]
+    if args.shard_total > 1:
+        # 交错切片：卡 i 处理 data_infos[i::total]，保证合并时能按步长放回还原全局顺序
+        dataset.data_infos = dataset.data_infos[args.shard_idx:: args.shard_total]
     dataset.is_vis_on_test = True
     data_loader = build_dataloader(
         dataset, samples_per_gpu=samples_per_gpu, workers_per_gpu=2,
@@ -67,6 +73,12 @@ def main():
 
     print('running inference ...')
     results = single_gpu_test(model, data_loader, show=False)
+    if args.out:
+        import pickle
+        with open(args.out, 'wb') as f:
+            pickle.dump(results, f)
+        print(f'results saved -> {args.out} ({len(results)} samples)')
+        return
     print('evaluating ...')
     eval_results = dataset.evaluate(results, metric='chamfer')
     for k, v in eval_results.items():

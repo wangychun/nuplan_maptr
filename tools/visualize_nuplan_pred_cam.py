@@ -56,6 +56,15 @@ def project(pts, lidar2img, min_depth=0.5, z=-1.6):
     return pix, valid
 
 
+def _scene_from_filename(filenames):
+    """从图像路径提取 scene(log) 名：.../sensor_blobs/<log_id>/CAM_XX/xxx.jpg。"""
+    for f in filenames:
+        parts = str(f).split('/')
+        if 'sensor_blobs' in parts and parts.index('sensor_blobs') + 1 < len(parts):
+            return parts[parts.index('sensor_blobs') + 1]
+    return 'unknown_scene'
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('config')
@@ -68,6 +77,8 @@ def main():
     ap.add_argument('--ann-file', default=None,
                     help='覆盖 test ann_file（如 nuplan_val_eval_sub.pkl / nuscenes 子集），默认用配置里的')
     ap.add_argument('--seed', type=int, default=None, help='随机采样种子，设置后随机取样本（覆盖不同 log/场景）')
+    ap.add_argument('--by-scene', action='store_true',
+                    help='按场景（log_id）分文件夹输出：<show-dir>/<log_id>/cam_XX_<cam>.png')
     args = ap.parse_args()
 
     import matplotlib
@@ -231,7 +242,12 @@ def main():
             ax.legend(handles=legend_handles, loc='upper right', fontsize=9, framealpha=0.7)
             ax.set_title(f'{cam_name} pred vs GT  batch={i}')
             ax.axis('off')
-            out = osp.join(show_dir, f'cam_{count:02d}_{cam_name}.png')
+            out_dir = show_dir
+            if args.by_scene:
+                scene = str(metas.get('scene_token') or '') or _scene_from_filename(filenames)
+                out_dir = osp.join(show_dir, scene)
+                mmcv.mkdir_or_exist(osp.abspath(out_dir))
+            out = osp.join(out_dir, f'cam_{count:02d}_{cam_name}.png')
             fig.savefig(out, dpi=110, bbox_inches='tight')
             plt.close(fig)
             print(f'[{count}] batch={i} cam={cam_name} pred_inst={int(keep.sum())} saved {out}')

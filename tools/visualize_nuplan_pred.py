@@ -37,6 +37,15 @@ NAMES = list(DEFAULT_NAMES)
 N_CLASSES = 3  # 默认 3 类；main 里根据 config map_classes 更新
 
 
+def _scene_from_filename(filenames):
+    """从图像路径提取 scene(log) 名：.../sensor_blobs/<log_id>/CAM_XX/xxx.jpg。"""
+    for f in filenames:
+        parts = str(f).split('/')
+        if 'sensor_blobs' in parts and parts.index('sensor_blobs') + 1 < len(parts):
+            return parts[parts.index('sensor_blobs') + 1]
+    return 'unknown_scene'
+
+
 def parse_args():
     ap = argparse.ArgumentParser()
     ap.add_argument('config', help='test config')
@@ -47,6 +56,8 @@ def parse_args():
     ap.add_argument('--ann-file', default=None,
                     help='覆盖 test ann_file（如 nuscenes 小子集 info），默认用配置里的')
     ap.add_argument('--seed', type=int, default=None, help='随机采样种子，设置后随机取样本（覆盖不同 log/场景）')
+    ap.add_argument('--by-scene', action='store_true',
+                    help='按场景（log_id）分文件夹输出：<show-dir>/<log_id>/pred_XX_batchN.png')
     return ap.parse_args()
 
 
@@ -107,6 +118,14 @@ def main():
     for i, data in enumerate(data_loader):
         if count >= args.num_samples:
             break
+        # 解析 img_metas 获取场景名（与 visualize_nuplan_pred_cam.py 相同）
+        im_meta = data['img_metas']
+        while hasattr(im_meta, 'data') or isinstance(im_meta, list):
+            im_meta = im_meta.data if hasattr(im_meta, 'data') else im_meta[0]
+            if isinstance(im_meta, dict) and 0 in im_meta:
+                im_meta = im_meta[0]
+                break
+        scene = str(im_meta.get('scene_token') or '') or _scene_from_filename(im_meta.get('filename') or [])
         gt_bboxes_3d = data['gt_bboxes_3d'].data[0][0]
         gt_labels_3d = data['gt_labels_3d'].data[0][0]
         if not (gt_labels_3d != -1).any():
@@ -168,7 +187,11 @@ def main():
             legend_handles.append(mlines.Line2D([], [], color=COLORS[ci], lw=2.8, ls=ls2, alpha=1.0,
                                                 label=f'{cname} (Pred)'))
         ax.legend(handles=legend_handles, loc='upper right', fontsize=9, framealpha=0.7)
-        out = osp.join(show_dir, f'pred_{count:02d}_batch{i}.png')
+        out_dir = show_dir
+        if args.by_scene:
+            out_dir = osp.join(show_dir, scene)
+            mmcv.mkdir_or_exist(osp.abspath(out_dir))
+        out = osp.join(out_dir, f'pred_{count:02d}_batch{i}.png')
         fig.savefig(out, dpi=120)
         plt.close(fig)
         print(f'[{count}] batch={i} pred_inst={int(keep.sum())} saved {out}')
